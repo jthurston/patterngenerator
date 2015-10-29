@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="js/vendor/html2canvas.js"></script>
+        <script src="js/vendor/Canvas2Image.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+        <div id="wrapper" width="100%" height="100%">
+
+          <div id="sheet">
+          </div>
+
+        </div>
+
+        <input type="button" id="btnSave" value="Save PNG"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
+<script src="js/polkadot.js">
+drawDots();
+</script>
+
+<script type="text/javascript">
+
+$(window).load(function() {
+ // executes when complete page is fully loaded, including all frames, objects and images
+  $("#btnSaver").click(function() {
+      html2canvas(document.body, {
+        useCORS: true,
+          onrendered: function(canvas) {
+                //return Canvas2Image.saveAsPNG(canvas);
+                $('body').append('<a id="export-image-container" download="polkadot.jpg">')
+                img = canvas.toDataURL("image/jpeg")
+                img = img.replace('data:image/jpeg;base64,', '')
+                finalImageSrc = 'data:image/jpeg;base64,' + img
+                $('#export-image-container').attr('href', finalImageSrc)
+                $('#export-image-container')[0].click()
+                $('#export-image-container').remove()
+          }
+    });
+   })
+
+// $("#btnSave").click(function() {
+//   html2canvas([$('#sheet')], {
+//       useCORS: true
+//     }).then(function (canvas) {
+//       if (navigator.msSaveBlob) {
+//         console.log('this is IE');
+//         var URL=window.URL;
+//         var BlobBuilder = window.MSBlobBuilder;
+//         navigator.saveBlob=navigator.msSaveBlob;
+//         var imgBlob = canvas.msToBlob();
+//         if (BlobBuilder && navigator.saveBlob) {
+//           var showSave =  function (data, name, mimetype) {
+//             var builder = new BlobBuilder();
+//             builder.append(data);
+//             var blob = builder.getBlob(mimetype||"application/octet-stream");
+//             if (!name)
+//               name = "Download.bin";
+//             navigator.saveBlob(blob, name);
+//           };
+//           showSave(imgBlob, 'barchart.png',"image/png");
+//         }
+//       } else {
+//         if ($('#export-image-container').length == 0)
+//             $('body').append('<a id="export-image-container" download="barchart.jpg">')
+//         img = canvas.toDataURL("image/jpeg")
+//         img = img.replace('data:image/jpeg;base64,', '')
+//         finalImageSrc = 'data:image/jpeg;base64,' + img
+//
+//         $('#export-image-container').attr('href', finalImageSrc)
+//         $('#export-image-container')[0].click()
+//         $('#export-image-container').remove()
+//       }
+// });
+// });
+});
+
+
+//<!CDATA[
+function save(canvas) {/*html2canvas-0.5.0 work with Promise.js*/
+    window.open(canvas.toDataURL());
+}
+$(document).ready(function(){
+    $('#btnSave').click(function () {
+        html2canvas(document.body, {
+            allowTaint: true,
+            logging: true,
+            taintTest: false
+            //onrendered: save /*0.4.1*/
+        }).then(save);/*0.5.0-rc*/
+    });
+});
+//]]>
+</script>
+
+</script>
