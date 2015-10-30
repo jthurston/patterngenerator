@@ -12,9 +12,11 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="js/vendor/spectrum.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         <script src="js/vendor/html2canvas.js"></script>
         <script src="js/vendor/Canvas2Image.js"></script>
+
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -23,6 +25,45 @@
 
         <!-- Add your site or application content here -->
 
+        <div id="menuContainer">
+
+        <div id="menu">
+          <span>Shape:</br>
+            <select name="shapemenu" id="shapemenu"  onchange="changeShape(this.value)">
+                <option value="circle">Circle</option>
+                <option value="square">Square</option>
+                <option value="diamond">Diamond</option>
+              </select>
+          </span></br>
+          <span>Color:</br>
+            <input type='text' id="bgp" />
+          </span></br>
+          <span>Border Size:</br>
+            <input type="number" value="2" name="quantity" min="0" max="50" onchange="changeBorderSize(this.value)">
+          </span></br>
+          <span>Border Color:</br>
+              <input type='text' id="bcp" />
+          </span></br>
+          <span>
+             Offset:</br>
+              <input type="checkbox" name="offSet" checked="checked" onclick="changeOffSet(this.checked);">
+          </span></br>
+          <span>Size:</br>
+            <input type="number" value="50" name="size" min="1" max="1000" onchange="changeSize(this.value)">
+          </span></br>
+          <span>Background:</br>
+            <input type='text' id="bgc" />
+          </span></br></br>
+          <span>
+            <input type="button" id="btnSave" value="Save PNG"/>
+          </span></br>
+        </div>
+        <div id="menuTab" onclick="closeMenu();">
+          <div id="menuTabContent">🔽Close</div>
+        </div>
+
+      </div>
+
         <div id="wrapper" width="100%" height="100%">
 
           <div id="sheet">
@@ -30,9 +71,10 @@
 
         </div>
 
-        <input type="button" id="btnSave" value="Save PNG"/>
+        <div id="export-image-container"></div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/vendor/spectrum.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
@@ -41,6 +83,7 @@
 <script src="js/polkadot.js">
 drawDots();
 </script>
+<script src="js/settings.js"></script>
 
 <script type="text/javascript">
 
@@ -61,41 +104,6 @@ $(window).load(function() {
           }
     });
    })
-
-// $("#btnSave").click(function() {
-//   html2canvas([$('#sheet')], {
-//       useCORS: true
-//     }).then(function (canvas) {
-//       if (navigator.msSaveBlob) {
-//         console.log('this is IE');
-//         var URL=window.URL;
-//         var BlobBuilder = window.MSBlobBuilder;
-//         navigator.saveBlob=navigator.msSaveBlob;
-//         var imgBlob = canvas.msToBlob();
-//         if (BlobBuilder && navigator.saveBlob) {
-//           var showSave =  function (data, name, mimetype) {
-//             var builder = new BlobBuilder();
-//             builder.append(data);
-//             var blob = builder.getBlob(mimetype||"application/octet-stream");
-//             if (!name)
-//               name = "Download.bin";
-//             navigator.saveBlob(blob, name);
-//           };
-//           showSave(imgBlob, 'barchart.png',"image/png");
-//         }
-//       } else {
-//         if ($('#export-image-container').length == 0)
-//             $('body').append('<a id="export-image-container" download="barchart.jpg">')
-//         img = canvas.toDataURL("image/jpeg")
-//         img = img.replace('data:image/jpeg;base64,', '')
-//         finalImageSrc = 'data:image/jpeg;base64,' + img
-//
-//         $('#export-image-container').attr('href', finalImageSrc)
-//         $('#export-image-container')[0].click()
-//         $('#export-image-container').remove()
-//       }
-// });
-// });
 });
 
 
@@ -106,6 +114,7 @@ function save(canvas) {/*html2canvas-0.5.0 work with Promise.js*/
 $(document).ready(function(){
     $('#btnSave').click(function () {
         html2canvas(document.body, {
+            useCORS: true,
             allowTaint: true,
             logging: true,
             taintTest: false
@@ -114,6 +123,4 @@ $(document).ready(function(){
     });
 });
 //]]>
-</script>
-
 </script>
