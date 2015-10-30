@@ -1,0 +1,21 @@
+{
+  "name": "polkadotgen",
+  "homepage": "https://github.com/jthurston/patterngenerator",
+  "authors": [
+    "Jeffery Thurston <jeffery.m.thurston@saic.com>"
+  ],
+  "description": "Pattern generator",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "package.json",
+    "src"
+  ]
+}

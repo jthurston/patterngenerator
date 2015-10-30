@@ -12,9 +12,9 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="js/vendor/spectrum.css">
+        <link rel="stylesheet" href="bower_components/spectrum/spectrum.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        <script src="js/vendor/html2canvas.js"></script>
+        <script src="bower_components/html2canvas/build/html2canvas.min.js"></script>
         <script src="js/vendor/Canvas2Image.js"></script>
 
     </head>
@@ -73,8 +73,8 @@
 
         <div id="export-image-container"></div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="js/vendor/spectrum.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/spectrum/spectrum.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
@@ -117,9 +117,9 @@ $(document).ready(function(){
             useCORS: true,
             allowTaint: true,
             logging: true,
-            taintTest: false
-            //onrendered: save /*0.4.1*/
-        }).then(save);/*0.5.0-rc*/
+            taintTest: false,
+            onrendered: save /*0.4.1*/
+        })/*.then(save);/*0.5.0-rc*/
     });
 });
 //]]>
