@@ -1,5 +1,5 @@
 var dotSize = 50; //in pixels(px) e.g. 10px
-var dotMargin = 15; //distance between each dot
+var dotMargin = 5; //distance between each dot
 var offSet = true;
 var offset = true;
 var shape = "circle"; //circle, square, diamond, more to Chrome
@@ -18,9 +18,9 @@ drawDots();
 function drawDots(){
 
   for (x = 0; x < dotQuantityW; x++){
-    $("#sheet").append("<div id='vert" + x +"'></div>");
+    $("#sheet").append("<span><div id='vert" + x +"'></div></span>");
     for (i = 0; i < dotQuantity; i++){
-      $("#vert"+x).append("<div class='shape'></div></div>");
+      $("#vert"+x).append("<span><div class='shape'></div></div></span>");
     };
 
     if (offset == true){
@@ -63,7 +63,7 @@ function drawDots(){
 }
 
 function getScreenHeight(){
-  var sh = $(window).height();
+  var sh = $(window).innerHeight();
   console.log (sh);
   var dotsVertical = sh / (dotSize + dotMargin);
   console.log (dotsVertical);
@@ -71,7 +71,7 @@ function getScreenHeight(){
 }
 
 function getScreenWidth(){
-  var sw = $(window).width();
+  var sw = $(window).innerWidth();
   var dotsHorizontal = sw / (dotSize + dotMargin);
   return dotsHorizontal;
 }
@@ -84,29 +84,31 @@ function calcVertOffSet(){
 //$(window).resize(function(){location.reload();});
 $(window).resize(function(){
   $("#sheet").empty();
-  console.log("redrawing!");
+  console.log($(window).innerHeight() + " " + $(window).innerWidth());
   drawDots();
 })
 
 function closeMenu(){
   $( "#menuContainer" ).animate({
-      left: "-=170"
+      left: "-=120"
     }, 500 );
   $("#menuTabContent").text("🔼Settings");
   //$("#menu").css("top","-150px");//
   //$("#menuTab").css("top","0px");//
   $('#menuTab').attr('onclick', '');
   $('#menuTab').attr('onclick','openMenu()');
+  $('#menuTab').css('height','85px');
 }
 
 function openMenu(){
   $( "#menuContainer" ).animate({
-      left: "+=170"
+      left: "+=120"
     }, 500 );
   $("#menuTabContent").text("🔽Close");
   $("#menu").css("left","0px");
   $('#menuTab').attr('onclick', '');
   $('#menuTab').attr('onclick','closeMenu()');
+  $('#menuTab').css('height','65px');
 }
 
 function changeShape(theShape){
@@ -130,7 +132,17 @@ function changeShape(theShape){
 function changeBorderSize(theBorderSize){
   console.log("Changing border size to: " + theBorderSize);
   $(".shape").css("border-width",theBorderSize); //set color of polka dot
-  borderWidth = theBorderSize;  
+  borderWidth = theBorderSize;
+  realignVerts();
+}
+
+function changedotMargin(theDotMargin){
+  console.log("Changing the margin to: " + theDotMargin);
+  $(".shape").css("margin",theDotMargin + "px"); //set margin of the shape
+  dotMargin = theDotMargin;
+  // alert($('span.x > span').length)
+  // $("[id^=vert]").css("left","-1px");
+  realignVerts();
 }
 
 function changeOffSet(theOffSet){
@@ -154,4 +166,15 @@ function changeSize(theSize){
     $(".shape").css("border-radius",theSize + "px"); //set heigh of polka dot
   }
   dotSize = theSize;
+  realignVerts();
+}
+
+function realignVerts(){
+  var verts = ($('div[id^=vert]').length);
+  for(y = 0; y < verts; y++){
+      var daTotal = ((+borderWidth * 2) + (+dotMargin * 2) + +dotSize);
+      daTotal = daTotal * y;
+      console.log(daTotal);
+      $('#vert'+y).css("left", daTotal + "px");
+  }
 }

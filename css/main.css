@@ -110,8 +110,8 @@ textarea {
    }
 
    #menu {
-     width: 150px;
-     height: 400px;
+     width: 100px;
+     height: 100% auto;
      position: absolute;
      background: grey;
      padding: 10px;
@@ -123,9 +123,9 @@ textarea {
 
    #menuTab {
      width: 29px;
-     height: 90px;
+     height: 65px;
      position: absolute;
-     margin-left: 170px;
+     margin-left: 120px;
      padding-top:  8px;
      margin-right: auto;
      left: 0;

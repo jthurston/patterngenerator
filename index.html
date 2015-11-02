@@ -28,34 +28,43 @@
         <div id="menuContainer">
 
         <div id="menu">
-          <span>Shape:</br>
+
+          <span>Shape</br>
             <select name="shapemenu" id="shapemenu"  onchange="changeShape(this.value)">
                 <option value="circle">Circle</option>
                 <option value="square">Square</option>
                 <option value="diamond">Diamond</option>
               </select>
           </span></br>
-          <span>Color:</br>
+          <span>Color</br>
             <input type='text' id="bgp" />
           </span></br>
-          <span>Border Size:</br>
-            <input type="number" value="2" name="quantity" min="0" max="50" onchange="changeBorderSize(this.value)">
+          <span>Margin</br>
+            <input type="number" value="5" name="margin" min="0" max="200" onchange="changedotMargin(this.value)">
           </span></br>
-          <span>Border Color:</br>
+          <span>Border Size</br>
+            <input type="number" value="2" name="bordersize" min="0" max="50" onchange="changeBorderSize(this.value)">
+          </span></br>
+          <span>Border Color</br>
               <input type='text' id="bcp" />
           </span></br>
           <span>
-             Offset:</br>
+             Offset</br>
               <input type="checkbox" name="offSet" checked="checked" onclick="changeOffSet(this.checked);">
           </span></br>
-          <span>Size:</br>
+          <span>Size</br>
             <input type="number" value="50" name="size" min="1" max="1000" onchange="changeSize(this.value)">
           </span></br>
-          <span>Background:</br>
+          <span>Background</br>
             <input type='text' id="bgc" />
           </span></br></br>
           <span>
-            <input type="button" id="btnSave" value="Save PNG"/>
+            <input type="button" id="btnRefresh" value="🔂Refresh" onclik="drawDots()">
+          </span>
+        </br>
+        </br>
+          <span>
+            <input type="button" id="btnSave" value="💾PNG"/>
           </span></br>
         </div>
         <div id="menuTab" onclick="closeMenu();">
@@ -66,8 +75,10 @@
 
         <div id="wrapper" width="100%" height="100%">
 
-          <div id="sheet">
-          </div>
+          <span id="x">
+            <div id="sheet">
+            </div>
+          </span>
 
         </div>
 
@@ -81,7 +92,7 @@
     </body>
 </html>
 <script src="js/polkadot.js">
-drawDots();
+//drawDots();
 </script>
 <script src="js/settings.js"></script>
 
